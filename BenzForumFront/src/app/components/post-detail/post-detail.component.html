@@ -1,0 +1,16 @@
+<div *ngIf="post" class="post-detail-container">
+  <h1 class="post-title">{{ post.title }}</h1>
+  <p class="post-author">By {{ post.user?.username }}</p>
+  <div class="post-content" [innerHTML]="post.content"></div>
+
+  <h2 class="comments-title">Comments</h2>
+  <div *ngFor="let comment of post.comments" class="comment-item">
+    <p class="comment-author"><strong>{{ comment.user?.username }}</strong></p>
+    <div class="comment-content" [innerHTML]="comment.content"></div>
+    <button (click)="deleteComment(comment.id)" class="delete-comment-button">Delete Comment</button>
+  </div>
+
+  <h3 class="add-comment-title">Add a Comment</h3>
+  <app-rich-text [(ngModel)]="newCommentContent" class="rich-text-editor"></app-rich-text>
+  <button (click)="addComment()" class="submit-comment-button">Submit Comment</button>
+</div>

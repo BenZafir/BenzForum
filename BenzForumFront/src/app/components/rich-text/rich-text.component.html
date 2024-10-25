@@ -1,0 +1,9 @@
+<div class="rich-text-container">
+  <ckeditor
+    class="rich-text-editor"
+    [editor]="Editor"
+    [config]="config"
+    [(ngModel)]="value"
+    (ngModelChange)="onEditorChange($event)"
+  ></ckeditor>
+</div>
