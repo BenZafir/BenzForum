@@ -70,7 +70,7 @@ This repository contains two main projects: `BenzForumBackend` and `BenzForumFro
 ### Backend
 
 - Configuration files for different environments can be found in the `BenzForumBackend` directory:
-  - [appsettings.json](BenzForumBackend/appsettings.json)
+  - [appsettings.json](BenzForumBackend/BenzForum/appsettings.json)
   - [appsettings.Development.json](BenzForumBackend/appsettings.Development.json)
 
 ### Frontend
