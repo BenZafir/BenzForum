@@ -13,7 +13,16 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]!);
+var jwtKey = builder.Configuration["Jwt:Key"]
+    ?? throw new InvalidOperationException(
+        "Jwt:Key is not configured. In development: dotnet user-secrets set \"Jwt:Key\" \"<value>\". " +
+        "Elsewhere: set the Jwt__Key environment variable.");
+
+if (jwtKey.Length < 32)
+    throw new InvalidOperationException(
+        "Jwt:Key must be at least 32 characters — HMAC-SHA256 requires a 256-bit key.");
+
+var key = Encoding.ASCII.GetBytes(jwtKey);
 
 // Add services to the container.
 builder.Services.AddDbContext<ForumContext>(options =>
