@@ -24,13 +24,20 @@ This repository contains two main projects: `BenzForumBackend` and `BenzForumFro
     dotnet restore
     ```
 
-3. change the connection string to your MSSQL DB (I used MSSQLLocalDB) in appsettings.Development.json and appsettings.json files:
+3. Set the JWT signing key. It is not in source control — provide it through
+   user secrets:
 
-4. Update the database (if applicable):
+```sh
+   cd BenzForum
+   dotnet user-secrets set "Jwt:Key" "$(openssl rand -base64 32)"
+```
 
-    ```sh
-    dotnet ef database update
-    ```
+   Any value of 32 characters or more works; HMAC-SHA256 needs a 256-bit key.
+   Outside Development, set the `Jwt__Key` environment variable instead.
+   See `appsettings.Example.json` for the full shape.
+
+4. The default connection string points at MSSQLLocalDB. Change it in
+   `appsettings.json` if you use a different server.
 
 5. Run the backend project:
 
